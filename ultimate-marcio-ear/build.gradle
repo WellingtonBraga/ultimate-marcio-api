@@ -1,0 +1,16 @@
+apply plugin: 'ear'
+
+dependencies {
+	deploy project(path: ':ultimate-marcio-war', configuration: 'archives')
+	earlib project(':ultimate-marcio-core')
+	earlib project(':ultimate-marcio-api')
+}
+
+ear {
+	deploymentDescriptor {
+		def warName = project(':ultimate-marcio-war').name
+		def warVersion = project(':ultimate-marcio-war').version
+		def warFileName = warName + '-' + warVersion + '.war'
+		webModule(warFileName, 'calculator')
+	}
+}
